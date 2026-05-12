@@ -4,9 +4,8 @@ class Weather {
   final double tempC;
   final String condition;
   final int humidity;
-  final String windKph;
+  final double windKph;
   bool? isCelsius = true;
-
 
   Weather({
     required this.city,
@@ -15,18 +14,18 @@ class Weather {
     required this.condition,
     required this.humidity,
     required this.windKph,
-    this.isCelsius
+    this.isCelsius,
   });
 
-  // Factory constructor to parse the JSON from WeatherAPI
+  // Factory constructor to parse JSON
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
       city: json['location']['name'],
       country: json['location']['country'],
-      tempC: json['current']['temp_c'],
+      tempC: json['current']['temp_c'].toDouble(),
       condition: json['current']['condition']['text'],
       humidity: json['current']['humidity'],
-      windKph: json['current']['wind_kph'],
+      windKph: json['current']['wind_kph'].toDouble(),
     );
   }
 }
